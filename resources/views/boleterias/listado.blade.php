@@ -1,4 +1,7 @@
-@extends('layouts.app') @section('content')
+ @extends('layouts.app')
+ 
+  @section('content')
+
 <div class="container">
   <br /> @if (\Session::has('success'))
   <div class="alert alert-success">
@@ -29,11 +32,12 @@
           <a href="{{action('BoleteriaController@edit', $boleteria['id'])}}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-        
-          <form action="{{action('BoleteriaController@destroy', $boleteria['id'])}}" method="DELETE">
-          @csrf
+
+          <form action="{{action('BoleteriaController@destroy', $boleteria['id'])}}" method="post" onsubmit="return confirm('Está seguro que desea borrar?');">
+            @csrf
             <button class="btn btn-danger" type="submit" name="eliminar" id="eliminar">Borrar</button>
-            <button type="submit" id="enviar">
+            <input name="_method" type="hidden" value="DELETE">
+ 
           </form>
         </td>
       </tr>
@@ -43,40 +47,6 @@
 
   <a class="btn btn-success" type="button" href="{{ route('boleterias.create') }}">Alta</a>
 
-  <div id="dialog-confirm" title="Eliminar">
-    <p>
-      <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Está seguro que desea eliminar?</p>
-  </div>
-  @stop @section('javascript')
-  <script>
-    $.noConflict();
 
-    jQuery(document).ready(function ($) {
-      //$('#enviar').hide();
-      $(function () {
-        //$('#enviar').hide();
-        $("#dialog-confirm").hide();
-        $('#eliminar').click(function () {
 
-          $("#dialog-confirm").dialog({
-            resizable: false,
-            height: "auto",
-            width: 400,
-            modal: true,
-            buttons: {
-              "Borrar": function () {
-                $('#enviar').click();
-                $(this).dialog("close");
-              },
-              "Cancelar": function () {
-                $(this).dialog("close");
-              }
-            }
-          });
-        })
-
-      });
-
-    });
-  </script>
   @stop

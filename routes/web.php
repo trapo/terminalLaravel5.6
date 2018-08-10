@@ -18,8 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('boleterias','BoleteriaController');
 Route::get('/boleterias/create', 'BoleteriaController@create')->name('boleterias.create');
 Route::get('/boleterias/listado', 'BoleteriaController@index')->name('boleterias.listado');
-Route::delete('/boleterias', 'BoleteriaController@destroy')->name('boleterias.listado');
+Route::delete('/boleterias/{id}', 'BoleteriaController@destroy')->name('boleterias.delete');
 

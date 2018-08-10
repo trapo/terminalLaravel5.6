@@ -102,6 +102,7 @@ class BoleteriaController extends Controller
     public function destroy($id)
     {
         $boleteria = \App\Boleterias::find($id);
+        var_dump($boleteria);
         $boleteria->delete();
         return redirect('boleterias')->with('success', 'Se borró Correctamente la Boleteria');
     }
